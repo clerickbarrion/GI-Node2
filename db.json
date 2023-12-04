@@ -1,0 +1,64 @@
+{
+    "employees": [
+        {
+            "id": 101,
+            "name": "John Doe",
+            "salary": 60000,
+            "department": "IT"
+        },
+        {
+            "id": 102,
+            "name": "Jane Smith",
+            "salary": 55000,
+            "department": "Marketing"
+        },
+        {
+            "id": 103,
+            "name": "Micheal Johnson",
+            "salary": 70000,
+            "department": "Finance"
+        },
+        {
+            "id": 104,
+            "name": "Emily Davis",
+            "salary": 65000,
+            "department": "HR"
+        },
+        {
+            "id": 105,
+            "name": "Robert Brown",
+            "salary": 58000,
+            "department": "Operations"
+        },
+        {
+            "id": 106,
+            "name": "Sarah White",
+            "salary": 62000,
+            "department": "Sales"
+        },
+        {
+            "id": 107,
+            "name": "Christopher Lee",
+            "salary": 75000,
+            "department": "Research and Development"
+        },
+        {
+            "id": 108,
+            "name": "Amanda Taylor",
+            "salary": 68000,
+            "department": "Customer Support"
+        },
+        {
+            "id": 109,
+            "name": "Daniel Miller",
+            "salary": 63000,
+            "department": "Logistics"
+        },
+        {
+            "id": 110,
+            "name": "Olivia Wilson",
+            "salary": 57000,
+            "department": "Administration"
+        }
+    ]
+}

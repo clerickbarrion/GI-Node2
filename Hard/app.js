@@ -2,23 +2,22 @@ const express = require('express')
 const app = express()
 const https = require('https')
 
+// contains json
 let endpoint = 'https://my-json-server.typicode.com/clerickbarrion/GI-Node2/employees'
+const port = 3000
 
+// gets the json data
 let data = ''
 https.get(endpoint, (res)=>{
-    if (res.statusCode == 404){
-        console.log('404: Employee not found')
-    } else {
-        res.on('data', chunk => {
-            data += chunk.toString()
-        })
-        res.on('end', ()=>{
-            data = JSON.parse(data)
-        })
-    }
+    res.on('data', chunk => {
+        data += chunk.toString()
+    })
+    res.on('end', ()=>{
+        data = JSON.parse(data)
+    })
 })
 
-
+// opens server on local host and writes employee data from json file
 app.get('/', (req,res)=>{
     res.writeHead(200,{"Content-Type": "text/html"})
     res.write('<h1 style="text-align:center">Employees</h1>')
@@ -36,6 +35,7 @@ app.get('/', (req,res)=>{
     res.end()
 })
 
+// routes for certain employee ids
 app.get('/:id', (req,res)=>{
     const employee = (Array.from(data).filter(employee => employee.id == req.params.id))[0]
     res.writeHead(200,{"Content-Type": "text/html"})
@@ -52,10 +52,11 @@ app.get('/:id', (req,res)=>{
             `)
         res.end()
     } catch(err){
-        res.write(`Error 404: Employee ${req.params.id} not found`)
+        res.statusCode = 404
+        res.write(`<h1 style="text-align:center;">Error ${res.statusCode}: Employee ${req.params.id} not found</h1>`)
         res.end()
     }
     
 })
 
-app.listen(3000)
+app.listen(port)

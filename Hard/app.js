@@ -7,8 +7,15 @@ const port = 3000
 // reads the json file and parses it
 let file = JSON.parse(fs.readFileSync('./db.json').toString())
 
-// opens server on local host and writes employee data from json file
+// writes raw json file
 app.get('/', (req,res)=>{
+    res.writeHead(200,{"Content-Type": "application/json"})
+    res.write(JSON.stringify(file))
+    res.end()
+})
+
+// writes employee data from json file
+app.get('/employees', (req,res)=>{
     res.writeHead(200,{"Content-Type": "text/html"})
     res.write('<h1 style="text-align:center">Employees</h1>')
     // writes all the employees
@@ -27,7 +34,7 @@ app.get('/', (req,res)=>{
 })
 
 // routes for certain employee ids
-app.get('/:id', (req,res)=>{
+app.get('/employees/:id', (req,res)=>{
     // finds employee id equal to the endpoint
     const employee = file.employees.find(employee => employee.id == req.params.id)
     res.writeHead(200,{"Content-Type": "text/html"})

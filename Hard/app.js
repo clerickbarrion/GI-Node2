@@ -14,22 +14,11 @@ app.get('/', (req,res)=>{
     res.end()
 })
 
-// writes employee data from json file
+// writes employee array
 app.get('/employees', (req,res)=>{
-    res.writeHead(200,{"Content-Type": "text/html"})
-    res.write('<h1 style="text-align:center">Employees</h1>')
+    res.writeHead(200,{"Content-Type": "application/json"})
     // writes all the employees
-    file.employees.forEach(employee => {
-        res.write(`
-        <ul style="float:left; text-align:center; list-style-type: none; padding: 0; width: 25%;flex-direction: column;">
-            <li>Id: ${employee.id}</li>
-            <li>Name: ${employee.name}</li>
-            <li>Salary: $${employee.salary}</li>
-            <li>Department: ${employee.department}</li>
-            <hr>
-        </ul>
-        `)
-    })
+    res.write(JSON.stringify(file.employees))
     res.end()
 })
 
@@ -37,23 +26,14 @@ app.get('/employees', (req,res)=>{
 app.get('/employees/:id', (req,res)=>{
     // finds employee id equal to the endpoint
     const employee = file.employees.find(employee => employee.id == req.params.id)
-    res.writeHead(200,{"Content-Type": "text/html"})
+    res.writeHead(200,{"Content-Type": "application/json"})
     //writes the employee
     try {
-        res.write('<h1 style="text-align:center;">Employee</h1>')
-        res.write(`
-            <ul style="text-align:center; list-style-type: none; padding: 0;">
-                <li>Id: ${employee.id}</li>
-                <li>Name: ${employee.name}</li>
-                <li>Salary: $${employee.salary}</li>
-                <li>Department: ${employee.department}</li>
-                <hr>
-            </ul>
-            `)
+        res.write(JSON.stringify(employee))
     // writes error if employee not found
     } catch {
         res.statusCode = 404
-        res.write(`<h1 style="text-align:center;">Error ${res.statusCode}: Employee ${req.params.id} not found</h1>`)
+        res.write(`Error ${res.statusCode}: Employee ${req.params.id} not found`)
     }
     res.end()
 })
